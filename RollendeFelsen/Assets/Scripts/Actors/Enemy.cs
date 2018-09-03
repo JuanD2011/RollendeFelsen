@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Enemy : Actor
 {
-    protected override void Movement()
+    protected override void Move()
     {
         throw new System.NotImplementedException();
     }
 
-    protected override void Push()
+    protected override IEnumerator Push()
     {
-        throw new System.NotImplementedException();
+        yield return null;
     }
 
     protected override void Stun()
