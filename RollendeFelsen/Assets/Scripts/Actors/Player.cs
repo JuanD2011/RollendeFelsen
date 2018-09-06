@@ -17,6 +17,9 @@ public class Player : Actor
     [SerializeField] private bool speedPU;
     private bool canAttack;
 
+    [SerializeField]
+    CapsuleCollider pushCapsule;
+
     //public bool SpeedPU
     //{
     //    get
@@ -31,6 +34,7 @@ public class Player : Actor
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Animator = GetComponent<Animator>();
         canAttack = true;
+        pushCapsule.enabled = false;
     }
 
     private void OnEnable()

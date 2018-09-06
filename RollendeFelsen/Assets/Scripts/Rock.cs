@@ -23,7 +23,6 @@ public class Rock : MonoBehaviour {
     {
         if (collision.gameObject.GetComponent<Actor>() != null) {
             Destroy(collision.gameObject);
-            Destroy(gameObject);
         }
     }
 }

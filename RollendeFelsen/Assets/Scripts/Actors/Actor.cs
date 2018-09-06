@@ -7,11 +7,11 @@ public abstract class Actor : MonoBehaviour, IPowerUp {
     protected MoveTypes moveType;
 
     protected abstract void Move();
-    protected abstract void Stun();
     protected abstract IEnumerator Push();
 
     public void PickPowerUp(PowerUp _powerUp)
     {
         throw new System.NotImplementedException();
     }
+    protected abstract void Stun();
 }
