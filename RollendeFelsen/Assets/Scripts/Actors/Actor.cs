@@ -8,10 +8,10 @@ public abstract class Actor : MonoBehaviour, IPowerUp {
 
     protected abstract void Move();
     protected abstract IEnumerator Push();
+    protected abstract IEnumerator Stun();
 
     public void PickPowerUp(PowerUp _powerUp)
     {
         throw new System.NotImplementedException();
     }
-    protected abstract void Stun();
 }

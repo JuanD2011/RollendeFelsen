@@ -16,6 +16,7 @@ public class Player : Actor
 
     [SerializeField] private bool speedPU;
     private bool canAttack;
+    private bool stun, stuned;
 
     [SerializeField]
     CapsuleCollider pushCapsule;
@@ -37,6 +38,8 @@ public class Player : Actor
         m_Animator = GetComponent<Animator>();
         canAttack = true;
         pushCapsule.enabled = false;
+        stun = false;
+        stuned = false;
     }
 
     private void OnEnable()
@@ -55,6 +58,16 @@ public class Player : Actor
         if(Input.GetKeyDown(KeyCode.Space) && canAttack)
         {
             StartCoroutine(Push());
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            StartCoroutine(Stun());
+            stun = true;
+        }
+        else {
+            stun = false;
+            pushCapsule.enabled = false;
         }
     }
 
@@ -92,9 +105,22 @@ public class Player : Actor
         canAttack = true;
     }
 
-    protected override void Stun()
+    protected override IEnumerator Stun()
     {
-        throw new System.NotImplementedException();
+        float time = 0f;
+        while (stun) {
+            time += Time.deltaTime;
+            if (time > 2f && time < 2.02f)
+            {
+                pushCapsule.enabled = true;
+                stuned = true;
+            }
+            else {
+                stuned = false;
+                pushCapsule.enabled = false;
+            }
+            yield return null;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -112,8 +138,15 @@ public class Player : Actor
         //Push other player
         if (other.gameObject.GetComponent<Actor>() != null && canAttack == false && pushCapsule.enabled == true)
         {
-            other.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 0.2f, ForceMode.Impulse);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 0f, ForceMode.Impulse);
             Debug.Log("Empujo");
+        }
+
+        if (other.gameObject.GetComponent<Actor>() != null && pushCapsule.enabled == true && stuned == true)
+        {
+            Debug.Log("Stuneo");
+            stun = false;
+            stuned = false;
         }
     }
 }

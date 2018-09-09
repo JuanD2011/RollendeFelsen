@@ -14,7 +14,7 @@ public class Enemy : Actor
         yield return null;
     }
 
-    protected override void Stun()
+    protected override IEnumerator Stun()
     {
         throw new System.NotImplementedException();
     }
