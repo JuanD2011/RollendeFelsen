@@ -6,35 +6,58 @@ public class CanvasMgr : MonoBehaviour {
     ButtonMgr buttonMgr;
     byte count;
 
+    public GameObject[] Canvas
+    {
+        get
+        {
+            return canvas;
+        }
+
+        set
+        {
+            canvas = value;
+        }
+    }
+    Player player;
+
     private void Start()
     {
+        player = (Player)FindObjectOfType(typeof(Player));
         buttonMgr = GetComponentInChildren<ButtonMgr>();
         buttonMgr.OnUnnpause += Unnpaused;
-        canvas[1].SetActive(false);
+        Canvas[1].SetActive(false);
+
+        player.OnGameOver += GameOverCanvas;
+
     }
 
     void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Paused();
-            if (canvas[1].activeInHierarchy && count >= 2)
+            if (Canvas[1].activeInHierarchy && count >= 2)
             {
                 Unnpaused();
             }
         }
     }
 
-    public void Paused() {
+    private void Paused() {
         count++;
-        canvas[0].SetActive(false);
+        Canvas[0].SetActive(false);
         Time.timeScale = 0;
-        canvas[1].SetActive(true);
+        Canvas[1].SetActive(true);
     }
 
-    public void Unnpaused() {
+    private void Unnpaused() {
         count = 0;
-        canvas[0].SetActive(true);
+        Canvas[0].SetActive(true);
         Time.timeScale = 1;
-        canvas[1].SetActive(false);
+        Canvas[1].SetActive(false);
+    }
+
+    private void GameOverCanvas() {
+        Canvas[0].SetActive(false);
+        Canvas[2].SetActive(true);
     }
 }

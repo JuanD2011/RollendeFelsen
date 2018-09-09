@@ -8,9 +8,12 @@ public class ButtonMgr : MonoBehaviour {
     public delegate void PauseDelegate();
     public event PauseDelegate OnUnnpause;
 
+    CanvasMgr canvasMgr;
+
     private void Start()
     {
         position = 0;
+        canvasMgr = GetComponentInParent<CanvasMgr>();
     }
 
     private void Update()
@@ -65,12 +68,27 @@ public class ButtonMgr : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && menuButtons[position].Selectioned1 == true && SceneManager.GetActiveScene().name == "GameScene")
+        if (Input.GetKeyDown(KeyCode.Return) && menuButtons[position].Selectioned1 == true && SceneManager.GetActiveScene().name == "GameScene" && canvasMgr.Canvas[1].activeInHierarchy)
         {
             switch (position)
             {
                 case 0:
                     OnUnnpause();
+                    break;
+                case 1:
+                    SceneManager.LoadScene("Menu");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return) && menuButtons[position].Selectioned1 == true && SceneManager.GetActiveScene().name == "GameScene" && canvasMgr.Canvas[2].activeInHierarchy)
+        {
+            switch (position)
+            {
+                case 0:
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                     break;
                 case 1:
                     SceneManager.LoadScene("Menu");

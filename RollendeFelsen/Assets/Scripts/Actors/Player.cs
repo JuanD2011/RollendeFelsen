@@ -20,6 +20,8 @@ public class Player : Actor
     [SerializeField]
     CapsuleCollider pushCapsule;
 
+    public delegate void GameOver();
+    public event GameOver OnGameOver;
     //public bool SpeedPU
     //{
     //    get
@@ -81,9 +83,11 @@ public class Player : Actor
 
     protected override IEnumerator Push()
     {
+        pushCapsule.enabled = true;
         canAttack = false;
         m_Animator.SetBool("isAttacking", true);
         yield return new WaitForSeconds(0.5f);
+        pushCapsule.enabled = false;
         m_Animator.SetBool("isAttacking", false);
         canAttack = true;
     }
@@ -91,5 +95,25 @@ public class Player : Actor
     protected override void Stun()
     {
         throw new System.NotImplementedException();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<Rock>() != null) {
+            Debug.Log("GameOver");
+            OnGameOver();
+            Time.timeScale = 0;
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //Push other player
+        if (other.gameObject.GetComponent<Actor>() != null && canAttack == false && pushCapsule.enabled == true)
+        {
+            other.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 0.2f, ForceMode.Impulse);
+            Debug.Log("Empujo");
+        }
     }
 }
