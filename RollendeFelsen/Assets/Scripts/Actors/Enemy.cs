@@ -8,14 +8,4 @@ public class Enemy : Actor
     {
         throw new System.NotImplementedException();
     }
-
-    protected override IEnumerator Push()
-    {
-        yield return null;
-    }
-
-    protected override IEnumerator Stun()
-    {
-        throw new System.NotImplementedException();
-    }
 }
