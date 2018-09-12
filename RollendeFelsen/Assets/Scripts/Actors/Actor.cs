@@ -14,6 +14,10 @@ public abstract class Actor : MonoBehaviour, IPowerUp {
     protected float moveVel;
     protected MoveTypes moveType;
 
+    protected float speedSmooothTime = 0.075f, animationSpeedPercent;
+
+    protected bool hit;
+
     private void Awake()
     {
         pushCapsule.enabled = false;
@@ -25,18 +29,32 @@ public abstract class Actor : MonoBehaviour, IPowerUp {
 
     protected abstract void Move();
 
-    protected IEnumerator Push() {
-        pushCapsule.enabled = true;
-        canAttack = false;
-        m_Animator.SetBool("isAttacking", true);
-        yield return new WaitForSeconds(0.5f);
-        pushCapsule.enabled = false;
-        m_Animator.SetBool("isAttacking", false);
-        canAttack = true;
+    protected IEnumerator Push()
+    {
+        if (!hit)
+        {
+            pushCapsule.enabled = true;
+            canAttack = false;
+            m_Animator.SetBool("isAttacking", true);
+            yield return new WaitForSeconds(0.5f);
+            pushCapsule.enabled = false;
+            m_Animator.SetBool("isAttacking", false);
+            canAttack = true; 
+        }
     }
 
-    protected IEnumerator Stun() {
+    protected IEnumerator Stun()
+    {
         yield return null;
+    }
+
+    protected IEnumerator Hit()
+    {
+        hit = true;
+        m_Animator.SetBool("hit", true);
+        yield return new WaitForSeconds(0.5f);
+        hit = false;
+        m_Animator.SetBool("hit", false);
     }
 
     public void PickPowerUp(PowerUp _powerUp)
@@ -49,7 +67,8 @@ public abstract class Actor : MonoBehaviour, IPowerUp {
         //Push other player
         if (other.gameObject.GetComponent<Actor>() != null && canAttack == false && pushCapsule.enabled == true)
         {
-            other.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 10f, ForceMode.Impulse);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 1f, ForceMode.Impulse);
+            StartCoroutine(other.gameObject.GetComponent<Actor>().Hit());
             Debug.Log("Empujo");
         }
 
