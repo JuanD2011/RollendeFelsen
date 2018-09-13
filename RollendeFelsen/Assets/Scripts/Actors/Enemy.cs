@@ -44,7 +44,7 @@ public class Enemy : Actor
                 if (distanceToPlayer <= agent.stoppingDistance)
                 {
                     LookAt(player);
-                    StartCoroutine(Push());
+                    StartCoroutine(Interacting());
                 }
             }
             else

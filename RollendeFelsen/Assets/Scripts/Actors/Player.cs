@@ -48,21 +48,10 @@ public class Player : Actor
     private void Update()
     {
         input = new Vector2(Input.GetAxisRaw("Horizontal1"), Input.GetAxisRaw("Vertical1"));
-        if(Input.GetKeyDown(KeyCode.Space) && canAttack)
+        if(Input.GetKeyDown(KeyCode.Space) && canAttack || canStun)
         {
-            StartCoroutine(Push());
+            StartCoroutine(Interacting());
         }
-
-        /*if (Input.GetKey(KeyCode.Space))
-        {
-            StartCoroutine(Stun());
-            stun = true;
-        }
-        else
-        {
-            stun = false;
-            pushCapsule.enabled = false;
-        }*/
     }
 
     private void FixedUpdate()
@@ -96,7 +85,6 @@ public class Player : Actor
         if (collision.gameObject.GetComponent<Rock>() != null) {
             Debug.Log("GameOver");
             OnGameOver();
-            Time.timeScale = 0;
         }
     }
 }
