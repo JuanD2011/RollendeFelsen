@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
 public class GameController : MonoBehaviour {
+    public Transform[] playerSpawns;
+
     [Header("Rock Settings")]
     [SerializeField] GameObject rockPrefab;
     [SerializeField] private Transform[] rockSpawns;

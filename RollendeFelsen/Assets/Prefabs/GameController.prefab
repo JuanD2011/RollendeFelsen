@@ -57,4 +57,9 @@ MonoBehaviour:
   - {fileID: 4260737956576110, guid: 52d3dde3fd2f088418cb62956de4ff8c, type: 2}
   - {fileID: 4079580137623212, guid: 52d3dde3fd2f088418cb62956de4ff8c, type: 2}
   - {fileID: 4355181968568748, guid: 52d3dde3fd2f088418cb62956de4ff8c, type: 2}
+  playerSpawns:
+  - {fileID: 4668425710522844, guid: eff7ec6d847ea0a4fae502632c576a40, type: 2}
+  - {fileID: 4281355711296168, guid: eff7ec6d847ea0a4fae502632c576a40, type: 2}
+  - {fileID: 4138664978130066, guid: eff7ec6d847ea0a4fae502632c576a40, type: 2}
+  - {fileID: 4933810625970902, guid: eff7ec6d847ea0a4fae502632c576a40, type: 2}
   frecuency: 10

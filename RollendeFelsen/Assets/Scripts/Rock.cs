@@ -18,11 +18,4 @@ public class Rock : MonoBehaviour {
     private void AutoDestroy() {
         Destroy(gameObject);
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.GetComponent<Actor>() != null) {
-            Destroy(collision.gameObject);
-        }
-    }
 }

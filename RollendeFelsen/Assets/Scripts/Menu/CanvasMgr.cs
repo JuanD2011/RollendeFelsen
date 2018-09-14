@@ -26,9 +26,6 @@ public class CanvasMgr : MonoBehaviour {
         buttonMgr = GetComponentInChildren<ButtonMgr>();
         buttonMgr.OnUnnpause += Unnpaused;
         Canvas[1].SetActive(false);
-
-        player.OnGameOver += GameOverCanvas;
-
     }
 
     void Update () {

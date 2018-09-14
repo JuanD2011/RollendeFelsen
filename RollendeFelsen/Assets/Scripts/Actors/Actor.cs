@@ -97,4 +97,23 @@ public abstract class Actor : MonoBehaviour, IPowerUp {
             Debug.Log("Stun");
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<Rock>() != null)
+        {
+            if (GetComponent<Enemy>() != null) {
+                Destroy(gameObject);
+            }
+            if (GetComponent<Player>() != null)
+            {
+                Debug.Log("Soy player");
+                Player player = GetComponent<Player>();
+                if (player != null) {
+                    GameController gc = (GameController)FindObjectOfType(typeof(GameController));
+                    player.transform.position = gc.playerSpawns[Random.Range(0, gc.playerSpawns.Length)].position;
+                }
+            }
+        }
+    }
 }
