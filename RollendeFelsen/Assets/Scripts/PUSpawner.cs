@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PUSpawner : MonoBehaviour
 {
@@ -32,5 +30,4 @@ public class PUSpawner : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawCube(transform.localPosition, size);
     }
-
 }

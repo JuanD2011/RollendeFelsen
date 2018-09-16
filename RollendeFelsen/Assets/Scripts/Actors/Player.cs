@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : Actor
 {
-    //private Rigidbody m_Rigidbody;
-    //private Animator m_Animator;
-
     private Vector2 input, inputDirection;
     private float targetRotation;
 
@@ -13,22 +11,10 @@ public class Player : Actor
     float turnSmoothVel, currentSpeed, speedSmoothVel, targetSpeed;
 
     [SerializeField] private bool speedPU;
-    //private bool canAttack;
-    //private bool stun, stuned;
-
-    //public bool SpeedPU
-    //{
-    //    get
-    //    {
-    //        return speedPU;
-    //    }
-    //}
 
     /*private void Awake()
     {
         moveType = MoveTypes.Input;
-        //m_Rigidbody = GetComponent<Rigidbody>();
-        //m_Animator = GetComponent<Animator>();
     }*/
 
     private void OnEnable()
@@ -74,5 +60,13 @@ public class Player : Actor
             animationSpeedPercent = ((speedPU) ? 1 : 0.5f) * inputDirection.magnitude;
             m_Animator.SetFloat("speed", animationSpeedPercent, speedSmooothTime, Time.deltaTime); 
         }
+    }
+
+    public IEnumerator Spawn() {
+        GameController gc = (GameController)FindObjectOfType(typeof(GameController));
+        transform.position = gc.playerSpawns[Random.Range(0, gc.playerSpawns.Length)].position;
+        enabled = false;
+        yield return new WaitForSeconds(6);
+        enabled = true;
     }
 }

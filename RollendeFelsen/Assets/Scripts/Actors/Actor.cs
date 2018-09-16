@@ -20,6 +20,9 @@ public abstract class Actor : MonoBehaviour, IPowerUp {
 
     protected bool canStun;
 
+    public delegate void Race(Actor _actor);
+    public static event Race OnDeath;
+
     private void Awake()
     {
         pushCapsule.enabled = false;
@@ -51,7 +54,6 @@ public abstract class Actor : MonoBehaviour, IPowerUp {
         canStun = false;
         yield return new WaitForSeconds(5);
         canStun = true;
-        Debug.Log(canStun);
     }
 
     protected IEnumerator Hit()
@@ -64,7 +66,7 @@ public abstract class Actor : MonoBehaviour, IPowerUp {
     }
 
     /// <summary>
-    /// Should Stun the Actor for a seconds
+    /// Should Stun the Actor for seconds
     /// </summary>
     /// <returns></returns>
     protected IEnumerator Stun(Actor _otherActor) {
@@ -103,16 +105,14 @@ public abstract class Actor : MonoBehaviour, IPowerUp {
         if (collision.gameObject.GetComponent<Rock>() != null)
         {
             if (GetComponent<Enemy>() != null) {
+                Enemy enemy = gameObject.GetComponent<Enemy>();
+                OnDeath(enemy);
                 Destroy(gameObject);
             }
             if (GetComponent<Player>() != null)
             {
-                Debug.Log("Soy player");
                 Player player = GetComponent<Player>();
-                if (player != null) {
-                    GameController gc = (GameController)FindObjectOfType(typeof(GameController));
-                    player.transform.position = gc.playerSpawns[Random.Range(0, gc.playerSpawns.Length)].position;
-                }
+                StartCoroutine(player.Spawn());
             }
         }
     }
