@@ -8,12 +8,16 @@ public abstract class PowerUp : MonoBehaviour{
 
     private void OnTriggerEnter(Collider other)
     {
-        GameObject collisioned = other.gameObject;
-
-        if (collisioned.GetComponent<IPowerUp>() != null) {
+        if (other.GetComponent<IPowerUp>() != null) {
             IPowerUp iPowerUp;
-            iPowerUp = collisioned.GetComponent<IPowerUp>();
-            iPowerUp.PickPowerUp(m);
+            iPowerUp = other.GetComponent<IPowerUp>();
+            iPowerUp.PickPowerUp(PickedPU());
         }
+    }
+
+    protected virtual PowerUp PickedPU() {
+        PowerUp _powerUp = null;
+
+        return _powerUp;
     }
 }

@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour {
 
     int positions;
     Actor[] actorsPos;
-    private Object[] players; //Only to calculate how many players are in the current game
+    public Object[] players; //Only to calculate how many players are in the current game
 
     [SerializeField] Text[] txtPositions;
 
@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour {
     }
 
     private void DeadPlayers(Actor _deadActor) {
-        for (int i = actorsPos.Length - 1; i >= 0; i--) {
+        for (int i = actorsPos.Length - 1; i > 0; i--) {
             if (actorsPos[i] == null) {
                 actorsPos[i] = _deadActor;
                 txtPositions[i].text = (i + 1).ToString() + " " + actorsPos[i].name + " Dead";

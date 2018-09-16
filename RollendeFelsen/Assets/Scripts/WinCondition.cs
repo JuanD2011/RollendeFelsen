@@ -10,8 +10,10 @@ public class WinCondition : MonoBehaviour {
         if (other.gameObject.GetComponent<Actor>() != null) {
             Actor actor = other.gameObject.GetComponent<Actor>();
             OnFinish(actor);
-            actor.enabled = false;
-            print("Llegue");
+            if (other.gameObject.GetComponent<Enemy>() != null)
+                Destroy(other.gameObject);
+            else
+                actor.enabled = false;
         }
     }
 

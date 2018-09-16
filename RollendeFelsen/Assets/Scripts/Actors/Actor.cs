@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public abstract class Actor : MonoBehaviour, IPowerUp {
+public abstract class Actor : MonoBehaviour{
 
     [SerializeField]
     protected CapsuleCollider pushCapsule;
@@ -74,11 +74,6 @@ public abstract class Actor : MonoBehaviour, IPowerUp {
         StartCoroutine(CanStun());
         yield return new WaitForSeconds(2);//Stun Time
         _otherActor.enabled = true;
-    }
-
-    public void PickPowerUp(PowerUp _powerUp)
-    {
-        throw new System.NotImplementedException();
     }
 
     private void OnTriggerEnter(Collider other)
