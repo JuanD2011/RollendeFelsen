@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public abstract class Actor : MonoBehaviour{
+public abstract class Actor : MonoBehaviour
+{
 
     [SerializeField]
     protected CapsuleCollider pushCapsule;
@@ -10,9 +11,6 @@ public abstract class Actor : MonoBehaviour{
 
     protected Rigidbody m_Rigidbody;
     protected Animator m_Animator;
-
-    protected float moveVel;
-    protected MoveTypes moveType;
 
     protected float speedSmooothTime = 0.075f, animationSpeedPercent;
 
@@ -73,13 +71,10 @@ public abstract class Actor : MonoBehaviour{
         _otherActor.enabled = true;
     }
 
-    private IEnumerator Spawn(Actor _actor)
+    private void Spawn(Actor _actor)
     {
-        GameController gc = (GameController)FindObjectOfType(typeof(GameController));
-        _actor.transform.position = gc.playerSpawns[Random.Range(0, gc.playerSpawns.Length)].position;
-        _actor.enabled = false;
-        yield return new WaitForSeconds(6);
-        _actor.enabled = true;
+        m_Animator.SetFloat("speed", 0, 0, Time.deltaTime);
+        StartCoroutine(GameController.instance.SpawnPlayer(_actor));
     }
 
     private void OnTriggerEnter(Collider other)
@@ -105,9 +100,10 @@ public abstract class Actor : MonoBehaviour{
     {
         if (collision.gameObject.GetComponent<Rock>() != null)
         {
-            if (GetComponent<Actor>() != null) {
+            if (GetComponent<Actor>() != null)
+            {
                 Actor actor = GetComponent<Actor>();
-                StartCoroutine(Spawn(actor));
+                Spawn(actor);
             }
         }
     }

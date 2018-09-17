@@ -12,21 +12,6 @@ public class Player : Actor
 
     [SerializeField] private bool speedPU;
 
-    /*private void Awake()
-    {
-        moveType = MoveTypes.Input;
-    }*/
-
-    private void OnEnable()
-    {
-        m_Rigidbody.isKinematic = false;
-    }
-
-    private void OnDisable()
-    {
-        m_Rigidbody.isKinematic = true;
-    }
-
     private void Update()
     {
         input = new Vector2(Input.GetAxisRaw("Horizontal1"), Input.GetAxisRaw("Vertical1"));

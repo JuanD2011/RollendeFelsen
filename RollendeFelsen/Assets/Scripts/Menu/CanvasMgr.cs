@@ -21,11 +21,11 @@ public class CanvasMgr : MonoBehaviour {
             canvas = value;
         }
     }
-    Player player;
+    //Player player;
 
     private void Start()
     {
-        player = (Player)FindObjectOfType(typeof(Player));
+        //player = (Player)FindObjectOfType(typeof(Player));
         buttonMgr = GetComponentInChildren<ButtonMgr>();
         buttonMgr.OnUnnpause += Unnpaused;
         Canvas[1].SetActive(false);

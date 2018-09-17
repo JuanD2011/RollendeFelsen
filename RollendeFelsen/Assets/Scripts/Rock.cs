@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class Rock : MonoBehaviour {
+public class Rock : MonoBehaviour
+{
     [SerializeField] private float startForce;
     Rigidbody mRigidbody;
 
@@ -10,12 +11,14 @@ public class Rock : MonoBehaviour {
         Invoke("Launch", 1f);
     }
 
-    private void Launch() {
+    private void Launch()
+    {
         mRigidbody.AddForce(-Vector3.forward * startForce, ForceMode.Impulse);
-        Invoke("AutoDestroy", 20f);
+        Invoke("AutoDestroy", 15f);
     }
 
-    private void AutoDestroy() {
+    private void AutoDestroy()
+    {
         Destroy(gameObject);
     }
 }
