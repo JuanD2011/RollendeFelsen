@@ -12,12 +12,7 @@ public class WinCondition : MonoBehaviour
         {
             Actor actor = other.gameObject.GetComponent<Actor>();
             OnFinish(actor);
-            if (other.gameObject.GetComponent<Enemy>() != null)
-            {
-                actor.gameObject.SetActive(false);
-            }                
-            else
-                actor.enabled = false;
+            actor.gameObject.SetActive(false);
         }
     }
 

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
     public Transform[] playerSpawns;
@@ -9,21 +11,22 @@ public class GameController : MonoBehaviour {
     [SerializeField] private Transform[] rockSpawns;
     [SerializeField] private float frecuency;
 
-    int positions;
-    Actor[] actorsPos;
+    List<Actor> actorsPos;
     public Object[] players; //Only to calculate how many players are in the current game
+    int positions;
 
     [SerializeField] Text[] txtPositions;
+
+    public delegate void Win();
+    public event Win OnWin, OnLooser;
 
     private void Start()
     {
         WinCondition winCondition = (WinCondition)FindObjectOfType(typeof(WinCondition));
         winCondition.OnFinish += PlayersFinishing;
-        Actor.OnDeath += DeadPlayers;
 
         players = FindObjectsOfType(typeof(Actor));
-        positions = players.Length;
-        actorsPos = new Actor[positions];
+        actorsPos = new List<Actor>();
 
         for (int i = 0; i < players.Length; i++) {
             txtPositions[i].enabled = true;
@@ -39,24 +42,22 @@ public class GameController : MonoBehaviour {
         Instantiate(rockPrefab, rockSpawns[randomSpawn].position, Quaternion.identity);
     }
 
-    private void DeadPlayers(Actor _deadActor) {
-        for (int i = actorsPos.Length - 1; i > 0; i--) {
-            if (actorsPos[i] == null) {
-                actorsPos[i] = _deadActor;
-                txtPositions[i].text = (i + 1).ToString() + " " + actorsPos[i].name + " Dead";
-                break;
-            }
-        }
-    }
-
     private void PlayersFinishing(Actor _playerFinish) {
-        for (int i = 0; i < actorsPos.Length; i++) {
-            if (actorsPos[i] == null) {
-                actorsPos[i] = _playerFinish;
-                txtPositions[i].text = (i + 1).ToString() + " " + actorsPos[i].name + " Finish";
-                break;
+        actorsPos.Add(_playerFinish);
+        txtPositions[positions].text = (positions + 1).ToString() + " " + actorsPos[positions].name + " Finish";
+        positions++;
+
+        if (actorsPos.Count == players.Length)
+        {
+            if (actorsPos[0] is Player)
+            {
+                print("Win");
+                OnWin();
+            }
+            else {
+                print("Looser");
+                OnLooser();
             }
         }
-
     }
 }

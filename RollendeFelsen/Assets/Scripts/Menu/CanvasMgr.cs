@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasMgr : MonoBehaviour {
 
     [SerializeField] GameObject[] canvas;
+    [SerializeField] Text txtFinish;
+
     ButtonMgr buttonMgr;
     byte count;
 
@@ -26,6 +29,10 @@ public class CanvasMgr : MonoBehaviour {
         buttonMgr = GetComponentInChildren<ButtonMgr>();
         buttonMgr.OnUnnpause += Unnpaused;
         Canvas[1].SetActive(false);
+
+        GameController gameController = (GameController)FindObjectOfType(typeof(GameController));
+        gameController.OnWin += WinCanvas;
+        gameController.OnLooser += LooserCanvas;
     }
 
     void Update () {
@@ -56,5 +63,15 @@ public class CanvasMgr : MonoBehaviour {
     private void GameOverCanvas() {
         Canvas[0].SetActive(false);
         Canvas[2].SetActive(true);
+    }
+
+    private void WinCanvas() {
+        canvas[2].SetActive(true);
+        txtFinish.text = "Winner";
+    }
+
+    private void LooserCanvas() {
+        canvas[2].SetActive(true);
+        txtFinish.text = "Looser";
     }
 }

@@ -20,9 +20,6 @@ public abstract class Actor : MonoBehaviour{
 
     protected bool canStun;
 
-    public delegate void Race(Actor _actor);
-    public static event Race OnDeath;
-
     private void Awake()
     {
         pushCapsule.enabled = false;
@@ -76,6 +73,15 @@ public abstract class Actor : MonoBehaviour{
         _otherActor.enabled = true;
     }
 
+    private IEnumerator Spawn(Actor _actor)
+    {
+        GameController gc = (GameController)FindObjectOfType(typeof(GameController));
+        _actor.transform.position = gc.playerSpawns[Random.Range(0, gc.playerSpawns.Length)].position;
+        _actor.enabled = false;
+        yield return new WaitForSeconds(6);
+        _actor.enabled = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         //Push other Actor
@@ -99,15 +105,9 @@ public abstract class Actor : MonoBehaviour{
     {
         if (collision.gameObject.GetComponent<Rock>() != null)
         {
-            if (GetComponent<Enemy>() != null) {
-                Enemy enemy = gameObject.GetComponent<Enemy>();
-                OnDeath(enemy);
-                Destroy(gameObject);
-            }
-            if (GetComponent<Player>() != null)
-            {
-                Player player = GetComponent<Player>();
-                StartCoroutine(player.Spawn());
+            if (GetComponent<Actor>() != null) {
+                Actor actor = GetComponent<Actor>();
+                StartCoroutine(Spawn(actor));
             }
         }
     }

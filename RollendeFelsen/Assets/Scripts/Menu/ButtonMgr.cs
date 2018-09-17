@@ -53,7 +53,7 @@ public class ButtonMgr : MonoBehaviour {
             menuButtons[position].Selectioned1 = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && menuButtons[position].Selectioned1 == true && SceneManager.GetActiveScene().name == "Menu")
+        if (Input.GetKeyDown(KeyCode.Space) && menuButtons[position].Selectioned1 == true && SceneManager.GetActiveScene().name == "Menu")
         {
             switch (position) {
                 case 0:
@@ -68,7 +68,7 @@ public class ButtonMgr : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && menuButtons[position].Selectioned1 == true && SceneManager.GetActiveScene().name == "GameScene" && canvasMgr.Canvas[1].activeInHierarchy)
+        if (Input.GetKeyDown(KeyCode.Space) && menuButtons[position].Selectioned1 == true && SceneManager.GetActiveScene().name == "GameScene" && canvasMgr.Canvas[1].activeInHierarchy)
         {
             switch (position)
             {
@@ -83,7 +83,7 @@ public class ButtonMgr : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && menuButtons[position].Selectioned1 == true && SceneManager.GetActiveScene().name == "GameScene" && canvasMgr.Canvas[2].activeInHierarchy)
+        if (Input.GetKeyDown(KeyCode.Space) && menuButtons[position].Selectioned1 == true && SceneManager.GetActiveScene().name == "GameScene" && canvasMgr.Canvas[2].activeInHierarchy)
         {
             switch (position)
             {

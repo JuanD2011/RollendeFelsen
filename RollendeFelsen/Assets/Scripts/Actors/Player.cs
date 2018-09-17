@@ -61,12 +61,4 @@ public class Player : Actor
             m_Animator.SetFloat("speed", animationSpeedPercent, speedSmooothTime, Time.deltaTime); 
         }
     }
-
-    public IEnumerator Spawn() {
-        GameController gc = (GameController)FindObjectOfType(typeof(GameController));
-        transform.position = gc.playerSpawns[Random.Range(0, gc.playerSpawns.Length)].position;
-        enabled = false;
-        yield return new WaitForSeconds(6);
-        enabled = true;
-    }
 }
