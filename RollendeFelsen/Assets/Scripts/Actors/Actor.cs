@@ -17,7 +17,6 @@ public abstract class Actor : MonoBehaviour
     protected bool canStun;
 
     private bool immunity = false;
-
     public bool Immunity
     {
         set

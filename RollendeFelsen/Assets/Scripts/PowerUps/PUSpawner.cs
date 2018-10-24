@@ -5,25 +5,23 @@ public class PUSpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] powerUpsPrefabs;
 
-    private float randomTime;
+    [SerializeField] private float spawnTime;
     private GameObject randomPU;
     private Collider boxCollider;
 
     private void Start()
     {
         boxCollider = GetComponent<Collider>();
-        Invoke("SpawnRandomPU", 3);
+        InvokeRepeating("SpawnRandomPU", 0, spawnTime);
     }
 
     private void SpawnRandomPU()
     {
-        randomTime = Random.Range(5, 10);
+        spawnTime = Random.Range(5, 10);
         randomPU = powerUpsPrefabs[Random.Range(0, powerUpsPrefabs.Length)];
 
         Vector3 position = GetSpawnPoint();
         Instantiate(randomPU, position, Quaternion.identity);
-
-        Invoke("SpawnRandomPU", randomTime);
     }
 
 

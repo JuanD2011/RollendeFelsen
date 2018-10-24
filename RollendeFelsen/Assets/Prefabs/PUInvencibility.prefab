@@ -21,8 +21,10 @@ GameObject:
   - component: {fileID: 4996132567238756}
   - component: {fileID: 33178583136080154}
   - component: {fileID: 23399691924883252}
-  m_Layer: 0
-  m_Name: PU2
+  - component: {fileID: 65886230447305660}
+  - component: {fileID: 114372251940455132}
+  m_Layer: 9
+  m_Name: PUInvencibility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,3 +85,26 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1308785214808368}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65886230447305660
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1308785214808368}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114372251940455132
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1308785214808368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf9e57315cd911e4dbebf4fbf972d0c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

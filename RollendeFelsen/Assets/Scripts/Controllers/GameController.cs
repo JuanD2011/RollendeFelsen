@@ -85,20 +85,22 @@ public class GameController : MonoBehaviour
     public IEnumerator SpawnPlayer(Actor _actor)
     {
         _actor.transform.position = GetSpawnPoint(playerSpawner);
-        if(_actor.gameObject.GetComponent<Enemy>() != null)
+        if (_actor is Enemy)
         {
-            _actor.gameObject.GetComponent<Enemy>().enabled = false;
-            _actor.gameObject.GetComponent<NavMeshAgent>().speed = 0;
+            _actor.GetComponent<NavMeshAgent>().isStopped = true;
         }
-        _actor.enabled = false;
-        _actor.gameObject.GetComponent<Collider>().enabled = false;
-        yield return new WaitForSeconds(5);
-        _actor.enabled = true;
-        if (_actor.gameObject.GetComponent<Enemy>() != null)
+        else if (_actor is Player) {
+            _actor.enabled = false;
+        }
+        _actor.Immunity = true;
+        yield return new WaitForSeconds(5f);
+        _actor.Immunity = false;
+        if (_actor is Enemy)
         {
-            _actor.gameObject.GetComponent<Enemy>().enabled = true;
-            _actor.gameObject.GetComponent<NavMeshAgent>().speed = 3;
+            _actor.GetComponent<NavMeshAgent>().isStopped = false;
         }
-        _actor.gameObject.GetComponent<Collider>().enabled = true;
+        else if (_actor is Player) {
+            _actor.enabled = true;
+        }
     }
 }
