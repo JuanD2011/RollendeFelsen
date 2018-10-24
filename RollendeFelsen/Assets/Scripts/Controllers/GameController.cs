@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.AI;
 
 public class GameController : MonoBehaviour
 {
@@ -87,7 +86,8 @@ public class GameController : MonoBehaviour
         _actor.transform.position = GetSpawnPoint(playerSpawner);
         if (_actor is Enemy)
         {
-            _actor.GetComponent<NavMeshAgent>().isStopped = true;
+            Enemy enemy = _actor as Enemy;
+            enemy.Agent.isStopped = true;
         }
         else if (_actor is Player) {
             _actor.enabled = false;
@@ -97,7 +97,8 @@ public class GameController : MonoBehaviour
         _actor.Immunity = false;
         if (_actor is Enemy)
         {
-            _actor.GetComponent<NavMeshAgent>().isStopped = false;
+            Enemy enemy = _actor as Enemy;
+            enemy.Agent.isStopped = false;
         }
         else if (_actor is Player) {
             _actor.enabled = true;
