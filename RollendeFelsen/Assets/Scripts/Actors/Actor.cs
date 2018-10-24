@@ -7,8 +7,6 @@ public abstract class Actor : MonoBehaviour
     [SerializeField]
     protected CapsuleCollider pushCapsule;
 
-    protected bool canAttack;
-
     protected Rigidbody m_Rigidbody;
     protected Animator m_Animator;
 
@@ -18,10 +16,19 @@ public abstract class Actor : MonoBehaviour
 
     protected bool canStun;
 
+    private bool immunity = false;
+
+    public bool Immunity
+    {
+        set
+        {
+            immunity = value;
+        }
+    }
+
     private void Awake()
     {
         pushCapsule.enabled = false;
-        canAttack = true;
 
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Animator = GetComponent<Animator>();
@@ -30,25 +37,22 @@ public abstract class Actor : MonoBehaviour
 
     protected abstract void Move();
 
+    private void Spawn(Actor _actor)
+    {
+        m_Animator.SetFloat("speed", 0, 0, Time.deltaTime);
+        StartCoroutine(GameController.instance.SpawnPlayer(_actor));
+    }
+
     protected IEnumerator Interacting()
     {
         if (!hit)
         {
             pushCapsule.enabled = true;
-            canAttack = false;
             m_Animator.SetBool("isAttacking", true);
             yield return new WaitForSeconds(0.2f);
             pushCapsule.enabled = false;
             m_Animator.SetBool("isAttacking", false);
-            canAttack = true; 
         }
-    }
-
-    protected IEnumerator CanStun()
-    {
-        canStun = false;
-        yield return new WaitForSeconds(5);
-        canStun = true;
     }
 
     protected IEnumerator Hit()
@@ -60,10 +64,6 @@ public abstract class Actor : MonoBehaviour
         m_Animator.SetBool("hit", false);
     }
 
-    /// <summary>
-    /// Should Stun the Actor for seconds
-    /// </summary>
-    /// <returns></returns>
     protected IEnumerator Stun(Actor _otherActor) {
         _otherActor.enabled = false;
         StartCoroutine(CanStun());
@@ -71,28 +71,29 @@ public abstract class Actor : MonoBehaviour
         _otherActor.enabled = true;
     }
 
-    private void Spawn(Actor _actor)
+    protected IEnumerator CanStun()
     {
-        m_Animator.SetFloat("speed", 0, 0, Time.deltaTime);
-        StartCoroutine(GameController.instance.SpawnPlayer(_actor));
+        canStun = false;
+        yield return new WaitForSeconds(5);
+        canStun = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //Push other Actor
-        if (other.gameObject.GetComponent<Actor>() != null && canAttack == false && pushCapsule.enabled == true && canStun == false)
-        {
-            other.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 1f, ForceMode.Impulse);
-            StartCoroutine(other.gameObject.GetComponent<Actor>().Hit());
-            Debug.Log("Empujo");
-        }
+        Actor otherActor = other.gameObject.GetComponent<Actor>();
 
-        //Stun other Actor
-        if (other.gameObject.GetComponent<Actor>() != null && canAttack == false && pushCapsule.enabled == true && canStun == true)
+        if (otherActor != null && pushCapsule.enabled == true && !otherActor.immunity)
         {
-            Actor actor = other.gameObject.GetComponent<Actor>();
-            StartCoroutine(Stun(actor));
-            Debug.Log("Stun");
+            if (!canStun)
+            {
+                other.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 1f, ForceMode.Impulse);
+                StartCoroutine(other.gameObject.GetComponent<Actor>().Hit());
+                Debug.Log("Empujo");
+            }
+            else {
+                StartCoroutine(Stun(otherActor));
+                Debug.Log("Stun");
+            }
         }
     }
 
@@ -100,11 +101,18 @@ public abstract class Actor : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Rock>() != null)
         {
-            if (GetComponent<Actor>() != null)
+            Actor actor = GetComponent<Actor>();
+
+            if (actor != null)
             {
-                Actor actor = GetComponent<Actor>();
                 Spawn(actor);
             }
+        }
+
+        if (collision.gameObject.GetComponent<PowerUp>() != null && collision.gameObject.GetComponent<Actor>() == null ) {
+            Destroy(collision.gameObject);
+            IPowerUp powerUp = collision.gameObject.GetComponent<IPowerUp>();
+            powerUp.PickPowerUp(collision.gameObject.GetComponent<PowerUp>(), GetComponent<Actor>());
         }
     }
 }

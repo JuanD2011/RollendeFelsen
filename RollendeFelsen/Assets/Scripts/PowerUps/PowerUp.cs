@@ -1,25 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PowerUp : MonoBehaviour
+public abstract class PowerUp : MonoBehaviour,IPowerUp
 {
-    PowerUp m;
+    protected PowerUpType mType;
+    protected float duration;
 
-    private void OnTriggerEnter(Collider other)
+    protected Actor actor;
+
+    protected virtual void Start() {
+        actor = GetComponent<Actor>();
+    }
+
+    public void PickPowerUp(PowerUp _powerUp, Actor actor)
     {
-        if (other.GetComponent<IPowerUp>() != null)
+        switch (_powerUp.mType)
         {
-            IPowerUp iPowerUp;
-            iPowerUp = other.GetComponent<IPowerUp>();
-            iPowerUp.PickPowerUp(PickedPU());
+            case PowerUpType.speedUp:
+                if(actor.GetComponent<SpeedUp>() == null)
+                    actor.gameObject.AddComponent<SpeedUp>();
+                break;
+            case PowerUpType.freeze:
+                ActorsToFreeze(actor);
+                break;
+            case PowerUpType.invencibility:
+                if (actor.GetComponent<Invencibility>() == null)
+                    actor.gameObject.AddComponent<Invencibility>();
+                break;
+            default:
+                break;
         }
     }
 
-    protected virtual PowerUp PickedPU()
-    {
-        PowerUp _powerUp = null;
-
-        return _powerUp;
+    private void ActorsToFreeze(Actor _actor) {
+        List<Actor> actorsToFreeze = GameController.instance.players;
+        actorsToFreeze.Remove(_actor);
+        foreach (Actor a in actorsToFreeze) {
+            if(a.gameObject.GetComponent<Freeze>() == null)
+                a.gameObject.AddComponent<Freeze>();
+        }
     }
 }

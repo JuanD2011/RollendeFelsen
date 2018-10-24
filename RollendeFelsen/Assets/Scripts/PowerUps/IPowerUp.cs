@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IPowerUp
+﻿public interface IPowerUp
 {
-    void PickPowerUp(PowerUp _powerUp);
+    void PickPowerUp(PowerUp _powerUp, Actor actor);
 }

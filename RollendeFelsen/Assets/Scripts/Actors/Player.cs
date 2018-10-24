@@ -12,10 +12,36 @@ public class Player : Actor
 
     [SerializeField] private bool speedPU;
 
+    public bool SpeedPU
+    {
+        get
+        {
+            return speedPU;
+        }
+
+        set
+        {
+            speedPU = value;
+        }
+    }
+
+    public float MoveSpeed
+    {
+        get
+        {
+            return moveSpeed;
+        }
+
+        set
+        {
+            moveSpeed = value;
+        }
+    }
+
     private void Update()
     {
         input = new Vector2(Input.GetAxisRaw("Horizontal1"), Input.GetAxisRaw("Vertical1"));
-        if(Input.GetKeyDown(KeyCode.Space) && canAttack)
+        if(Input.GetKeyDown(KeyCode.Space) && pushCapsule.enabled == false)
         {
             StartCoroutine(Interacting());
         }
@@ -38,11 +64,11 @@ public class Player : Actor
                 transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVel, turnSmooth);
             }
 
-            targetSpeed = ((speedPU) ? powerUpSpeed : moveSpeed) * inputDirection.magnitude;
+            targetSpeed = ((SpeedPU) ? powerUpSpeed : MoveSpeed) * inputDirection.magnitude;
             currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVel, speedSmooothTime);
 
             transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
-            animationSpeedPercent = ((speedPU) ? 1 : 0.5f) * inputDirection.magnitude;
+            animationSpeedPercent = ((SpeedPU) ? 1 : 0.5f) * inputDirection.magnitude;
             m_Animator.SetFloat("speed", animationSpeedPercent, speedSmooothTime, Time.deltaTime); 
         }
     }

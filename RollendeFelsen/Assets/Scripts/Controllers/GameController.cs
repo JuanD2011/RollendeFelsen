@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private float frecuency;
 
     List<Actor> actorsPos;
-    public Object[] players; //Only for calculate how many players are in the current game
+    public List<Actor> players; //Only for calculate how many players are in the current game
     int positions;
     [SerializeField] private Collider playerSpawner;
 
@@ -35,10 +35,11 @@ public class GameController : MonoBehaviour
         WinCondition winCondition = (WinCondition)FindObjectOfType(typeof(WinCondition));
         winCondition.OnFinish += PlayersFinishing;
 
-        players = FindObjectsOfType(typeof(Actor));
+        players = new List<Actor>();
         actorsPos = new List<Actor>();
+        players.AddRange(FindObjectsOfType<Actor>());
 
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < players.Count; i++)
         {
             txtPositions[i].enabled = true;
         }
@@ -57,7 +58,7 @@ public class GameController : MonoBehaviour
         txtPositions[positions].text = (positions + 1).ToString() + " " + actorsPos[positions].name + " Finish";
         positions++;
 
-        if (actorsPos.Count == players.Length)
+        if (actorsPos.Count == players.Count)
         {
             if (actorsPos[0] is Player)
             {

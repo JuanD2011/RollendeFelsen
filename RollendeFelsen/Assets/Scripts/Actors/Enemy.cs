@@ -19,11 +19,24 @@ public class Enemy : Actor
     [SerializeField]
     Collider ground;
 
+    public NavMeshAgent Agent
+    {
+        get
+        {
+            return agent;
+        }
+
+        set
+        {
+            agent = value;
+        }
+    }
+
     private void Start()
     {
         player = PlayerManager.instance.player.transform;
         target = PlayerManager.instance.target.transform;
-        agent = GetComponent<NavMeshAgent>();
+        Agent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
@@ -39,13 +52,13 @@ public class Enemy : Actor
 
         Move();
 
-        if(rockIsComing && agent.remainingDistance > agent.stoppingDistance)
+        if(rockIsComing && Agent.remainingDistance > Agent.stoppingDistance)
         {
-            agent.SetDestination(destination);
+            Agent.SetDestination(destination);
         }
         else
         {
-            if(agent.remainingDistance <= agent.stoppingDistance)
+            if(Agent.remainingDistance <= Agent.stoppingDistance)
             {
                 rockIsComing = false;
             }
@@ -58,9 +71,9 @@ public class Enemy : Actor
         {
             if (distanceToPlayer <= goPushRadius)
             {
-                agent.SetDestination(player.position);
+                Agent.SetDestination(player.position);
 
-                if (distanceToPlayer <= agent.stoppingDistance)
+                if (distanceToPlayer <= Agent.stoppingDistance)
                 {
                     LookAt(player);
                     StartCoroutine(Interacting());
@@ -68,11 +81,11 @@ public class Enemy : Actor
             }
             else
             {
-                agent.SetDestination(target.position);
+                Agent.SetDestination(target.position);
                 LookAt(target);
             }
 
-            animationSpeedPercent = (agent.velocity.magnitude > 0.2f) ? 0.5f : 0;
+            animationSpeedPercent = (Agent.velocity.magnitude > 0.2f) ? 0.5f : 0;
             m_Animator.SetFloat("speed", animationSpeedPercent, speedSmooothTime, Time.deltaTime); 
         }
 
