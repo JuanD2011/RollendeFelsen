@@ -26,9 +26,6 @@ public class GameController : MonoBehaviour
 
     [SerializeField] Text[] txtPositions;
 
-    public delegate void Win();
-    public event Win OnWin, OnLooser;
-
     private void Start()
     {
         WinCondition winCondition = (WinCondition)FindObjectOfType(typeof(WinCondition));
@@ -56,17 +53,16 @@ public class GameController : MonoBehaviour
         actorsPos.Add(_playerFinish);
         txtPositions[positions].text = (positions + 1).ToString() + " " + actorsPos[positions].name + " Finish";
         positions++;
+        print(actorsPos.Count);
 
         if (actorsPos.Count == players.Count)
         {
             if (actorsPos[0] is Player)
             {
                 print("Win");
-                OnWin();
             }
             else {
                 print("Looser");
-                OnLooser();
             }
         }
     }
