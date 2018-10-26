@@ -96,6 +96,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8328e279eff70248aac03e8f22e0fff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushCapsule: {fileID: 0}
+  goPushRadius: 0
+  lookForRockRadius: 0
+  rockLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  powerUps:
+    serializedVersion: 2
+    m_Bits: 512
+  ground: {fileID: 0}
 --- !u!136 &136653989805702502
 CapsuleCollider:
   m_ObjectHideFlags: 1

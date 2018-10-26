@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23399691924883252}
   - component: {fileID: 65886230447305660}
   - component: {fileID: 114372251940455132}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: PUInvencibility
   m_TagString: Untagged
   m_Icon: {fileID: 0}

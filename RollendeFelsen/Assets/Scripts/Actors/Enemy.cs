@@ -14,7 +14,7 @@ public class Enemy : Actor
     Vector3 direction;
     Quaternion lookRotation;
     bool rockIsComing;
-    [SerializeField] LayerMask rockLayer;
+    [SerializeField] LayerMask rockLayer, powerUps;
     Vector3 destination;
     [SerializeField]
     Collider ground;
@@ -44,6 +44,7 @@ public class Enemy : Actor
         if(Time.frameCount % 30 == 0)
         {
             distanceToPlayer = Vector3.Distance(player.localPosition, transform.localPosition);
+            LookForPowerUps();
         }
         if (Time.frameCount % 60 == 0)
         {
@@ -108,7 +109,7 @@ public class Enemy : Actor
                 destination = transform.localPosition + new Vector3(3.5f, 0, 1);
             }
 
-            destination = new Vector3(Mathf.Clamp(destination.x, ground.bounds.min.x + 0.1f, ground.bounds.max.x - 0.1f), destination.y, destination.z);
+            destination = new Vector3(Mathf.Clamp(destination.x, ground.bounds.min.x + 0.2f, ground.bounds.max.x - 0.2f), destination.y, destination.z);
 
             Debug.Log("Ols");
             //NavMeshHit navMeshHit;
@@ -117,6 +118,17 @@ public class Enemy : Actor
             //    Debug.Log("Holi");
             //    agent.SetDestination(navMeshHit.position);
             //}
+        }
+    }
+
+    private void LookForPowerUps() {
+
+        RaycastHit raycastHit;
+
+        if (Physics.SphereCast(transform.localPosition, lookForRockRadius, Vector3.forward, out raycastHit, lookForRockRadius * 2, powerUps))
+        {
+            Transform hitTransform = raycastHit.transform;
+            print(hitTransform.gameObject.name);
         }
     }
 

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23272317276290764}
   - component: {fileID: 65787858694932688}
   - component: {fileID: 114625870681684792}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: PUFreeze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
