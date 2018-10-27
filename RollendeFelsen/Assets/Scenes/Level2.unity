@@ -112,7 +112,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 62bf48fda1d2db44f8660b996082b8c4, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: b4b014db19503b740908b0f14c20d51a, type: 2}
 --- !u!1 &1126697
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,8 +293,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 3332171}
   m_LocalRotation: {x: -0.17087528, y: -0, z: -0, w: 0.98529273}
-  m_LocalPosition: {x: 8.9, y: 9.4, z: 20.4}
-  m_LocalScale: {x: 2, y: 5.490401, z: 92.93}
+  m_LocalPosition: {x: 8.9, y: 13.8, z: 32.3}
+  m_LocalScale: {x: 2, y: 5.490401, z: 120.18637}
   m_Children: []
   m_Father: {fileID: 1281153310}
   m_RootOrder: 0
@@ -928,7 +928,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 184303436}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 25.29, z: 71.4}
+  m_LocalPosition: {x: 0, y: 34.4, z: 96.13}
   m_LocalScale: {x: 15.91, y: 1, z: 15}
   m_Children: []
   m_Father: {fileID: 1281153310}
@@ -1778,7 +1778,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.27
-  m_Speed: 3
+  m_Speed: 3.2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 500
@@ -1851,7 +1851,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 593993438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.48, y: 30, z: 66.17}
+  m_LocalPosition: {x: 0.2, y: 39.3, z: 92.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1892,7 +1892,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.27
-  m_Speed: 3
+  m_Speed: 3.2
   m_Acceleration: 8
   avoidancePriority: 10
   m_AngularSpeed: 500
@@ -3055,7 +3055,7 @@ Transform:
   m_GameObject: {fileID: 1281153309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.82483, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 1, z: 1}
   m_Children:
   - {fileID: 3332172}
   - {fileID: 1414577115}
@@ -3435,8 +3435,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1414577114}
   m_LocalRotation: {x: -0.17087528, y: -0, z: -0, w: 0.98529273}
-  m_LocalPosition: {x: -8.9, y: 9.4, z: 20.4}
-  m_LocalScale: {x: 2, y: 5.490401, z: 92.93003}
+  m_LocalPosition: {x: -8.9, y: 13.8, z: 32.3}
+  m_LocalScale: {x: 2, y: 5.490401, z: 120.18641}
   m_Children: []
   m_Father: {fileID: 1281153310}
   m_RootOrder: 1
@@ -4552,7 +4552,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1806619779}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.19999981, y: 26.87, z: 64.8}
+  m_LocalPosition: {x: -0.19999981, y: 35.3, z: 90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4600,6 +4600,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 1438847651}
   slider: {fileID: 1835812760}
+--- !u!114 &1828641613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1828641611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f629457085321941ad4ea01354cc62f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpsPrefabs:
+  - {fileID: 1054930189073642, guid: 6b7dcc8ea9432284c90c6c2003a9acdb, type: 2}
+  - {fileID: 1308785214808368, guid: e8bd55cfd466c9d489415588a7927613, type: 2}
+  - {fileID: 1875102480081530, guid: 873895bdb9e98d54cb40c260380f00c0, type: 2}
+  spawnTime: 6
+  boxCollider: {fileID: 2055899486}
 --- !u!114 &1828641614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4816,7 +4833,7 @@ Prefab:
     - target: {fileID: 114927460451031038, guid: e4a9c3dd283150c47add1615d616d388,
         type: 2}
       propertyPath: frecuency
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114927460451031038, guid: e4a9c3dd283150c47add1615d616d388,
         type: 2}
@@ -4851,8 +4868,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1910122912}
   m_LocalRotation: {x: -0.17364825, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 9.4, z: 20.4}
-  m_LocalScale: {x: 15.91, y: 1, z: 92.930046}
+  m_LocalPosition: {x: 0, y: 13.8, z: 32.3}
+  m_LocalScale: {x: 15.91, y: 1, z: 120.18643}
   m_Children: []
   m_Father: {fileID: 1281153310}
   m_RootOrder: 2
@@ -5063,7 +5080,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2055899485}
-  - component: {fileID: 2055899484}
   - component: {fileID: 2055899486}
   m_Layer: 9
   m_Name: PowerUp Spawner
@@ -5072,35 +5088,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2055899484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2055899483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f629457085321941ad4ea01354cc62f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerUpsPrefabs:
-  - {fileID: 1875102480081530, guid: 873895bdb9e98d54cb40c260380f00c0, type: 2}
-  - {fileID: 1308785214808368, guid: e8bd55cfd466c9d489415588a7927613, type: 2}
-  - {fileID: 1054930189073642, guid: 6b7dcc8ea9432284c90c6c2003a9acdb, type: 2}
-  spawnTime: 2
 --- !u!4 &2055899485
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2055899483}
-  m_LocalRotation: {x: -0.17364825, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0.11, y: 9.82, z: 19.1}
-  m_LocalScale: {x: 0.75, y: 1, z: 1}
+  m_LocalRotation: {x: -0.17285225, y: -0, z: -0, w: 0.98494786}
+  m_LocalPosition: {x: 0.11, y: 16.1, z: 35.4}
+  m_LocalScale: {x: 0.75, y: 0.5, z: 1.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: -20, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -19.907001, y: 0, z: 0}
 --- !u!65 &2055899486
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5111,5 +5111,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 12.93, y: 0.5, z: 90}
+  m_Size: {x: 12.93, y: 2, z: 90}
   m_Center: {x: 0, y: 0, z: 0}
