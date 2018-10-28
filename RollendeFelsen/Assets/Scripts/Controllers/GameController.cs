@@ -10,7 +10,11 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else {
+            DontDestroyOnLoad(gameObject);
+        }
     }
     #endregion
 
@@ -19,23 +23,39 @@ public class GameController : MonoBehaviour
     [SerializeField] private Collider rockSpawner;
     [SerializeField] private float frecuency;
 
-    List<Actor> actorsPos;
-    public List<Actor> players; //Only for calculate how many players are in the current game
+    private List<Actor> actorsPos;
+    private List<Actor> players; //Only for calculate how many players are in the current game
     int positions;
     [SerializeField] private Collider playerSpawner;
 
     [SerializeField] Text[] txtPositions;
+
+    public delegate void FinishGame(bool _finishCondition);
+    public FinishGame delWin, delLoose;
+
+    public List<Actor> Players
+    {
+        get
+        {
+            return players;
+        }
+
+        set
+        {
+            players = value;
+        }
+    }
 
     private void Start()
     {
         WinCondition winCondition = (WinCondition)FindObjectOfType(typeof(WinCondition));
         winCondition.OnFinish += PlayersFinishing;
 
-        players = new List<Actor>();
+        Players = new List<Actor>();
         actorsPos = new List<Actor>();
-        players.AddRange(FindObjectsOfType<Actor>());
+        Players.AddRange(FindObjectsOfType<Actor>());
 
-        for (int i = 0; i < players.Count; i++)
+        for (int i = 0; i < Players.Count; i++)
         {
             txtPositions[i].enabled = true;
         }
@@ -55,13 +75,15 @@ public class GameController : MonoBehaviour
         positions++;
         print(actorsPos.Count);
 
-        if (actorsPos.Count == players.Count)
+        if (actorsPos.Count >= Players.Count)
         {
             if (actorsPos[0] is Player)
             {
+                delWin(true);
                 print("Win");
             }
             else {
+                delLoose(false);
                 print("Looser");
             }
         }

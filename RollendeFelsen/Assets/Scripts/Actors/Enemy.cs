@@ -72,7 +72,6 @@ public class Enemy : Actor
         {
             if (Agent.remainingDistance > Agent.stoppingDistance)
             {
-                print("Holi");
                 Agent.SetDestination(destination);
             }
             else

@@ -10,6 +10,7 @@ public abstract class Item
             return id;
         }
     }
+
     private Dictionary<TypeCurrency, int> costo = new Dictionary<TypeCurrency, int>();
     public Dictionary<TypeCurrency, int> Costo
     {
@@ -23,7 +24,6 @@ public abstract class Item
             costo = value;
         }
     }
-
 
     public Item(int _id, int _costoCurrencyUno, int _costoCurrencyDos, int _costoCurrencyTres) {
         id = _id;

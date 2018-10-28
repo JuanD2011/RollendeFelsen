@@ -7,6 +7,16 @@ public class LvlMgr : MonoBehaviour
 {
     [SerializeField] GameObject loadingScreen;
     [SerializeField] Slider slider;
+    [SerializeField] GameObject[] canvas;
+    [SerializeField] Text txtFinish;
+
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name != "Menu") {
+            GameController.instance.delLoose += Finish;
+            GameController.instance.delWin += Finish;
+        }
+    }
 
     public void Levels(string levelName)
     {
@@ -41,5 +51,16 @@ public class LvlMgr : MonoBehaviour
 
     public void Restart() {
         StartCoroutine(LoadAsynchronously(SceneManager.GetActiveScene().name));
+    }
+
+    private void Finish(bool _conditionOfWin) {
+        PauseGame();
+        canvas[0].SetActive(false);
+        canvas[1].SetActive(true);
+        if (_conditionOfWin)
+            txtFinish.text = "Winner!!!";
+        else
+            txtFinish.text = "Looooseeerr!!!!";
+
     }
 }

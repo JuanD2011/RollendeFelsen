@@ -33,7 +33,7 @@ public abstract class PowerUp : MonoBehaviour,IPowerUp
     }
 
     private void ActorsToFreeze(Actor _actor) {
-        List<Actor> actorsToFreeze = GameController.instance.players;
+        List<Actor> actorsToFreeze = GameController.instance.Players;
         actorsToFreeze.Remove(_actor);
         foreach (Actor a in actorsToFreeze) {
             if(a.gameObject.GetComponent<Freeze>() == null)

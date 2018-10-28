@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -11,6 +9,17 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        SkinnedMeshRenderer mskinnedMeshRenderer = player.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>();
+
+        if (mskinnedMeshRenderer != null) {
+            if (EngineUnity.isFirstSkin)
+                mskinnedMeshRenderer.material.color = Color.gray;
+            else if (EngineUnity.isSecondSkin)
+                mskinnedMeshRenderer.material.color = Color.cyan;
+            else if (EngineUnity.isThirdSkin)
+                mskinnedMeshRenderer.material.color = Color.yellow;
+        }
     }
 
     #endregion

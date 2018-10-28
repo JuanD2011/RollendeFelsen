@@ -21,15 +21,9 @@ public class Inventario
         }
     }
 
-    public delegate void InventarioDelegate();
-    public static event InventarioDelegate OnDescarteSatisfactorio, OnDescarteNonConsumable;
-    public static event InventarioDelegate OnConsumirItem, OnConsumirNonConsumable;
-
     public Inventario()
     {
         billetera.Add(TypeCurrency.firstCurrency, 40);
-        billetera.Add(TypeCurrency.secondCurrency, 40);
-        billetera.Add(TypeCurrency.thirdCurrency, 40);
     }
 
     public static Inventario Instancia
@@ -81,17 +75,13 @@ public class Inventario
     public void ActualizarCurrency(Dictionary<TypeCurrency, int> _costo)
     {
         billetera[TypeCurrency.firstCurrency] += _costo[TypeCurrency.firstCurrency];
-        billetera[TypeCurrency.secondCurrency] += _costo[TypeCurrency.secondCurrency];
-        billetera[TypeCurrency.thirdCurrency] += _costo[TypeCurrency.thirdCurrency];
     }
 
     public bool VerificaDisponibilidadMonetaria(Dictionary<TypeCurrency, int> _costo)
     {
         bool puedoComprarSignoPregunta = true;
 
-        if (billetera[TypeCurrency.firstCurrency] < _costo[TypeCurrency.firstCurrency] ||
-            billetera[TypeCurrency.secondCurrency] < _costo[TypeCurrency.secondCurrency] ||
-            billetera[TypeCurrency.thirdCurrency] < _costo[TypeCurrency.thirdCurrency])
+        if (billetera[TypeCurrency.firstCurrency] < _costo[TypeCurrency.firstCurrency])
         {
             puedoComprarSignoPregunta = false;
         }
@@ -109,10 +99,6 @@ public class Inventario
             {
                 inventario[_item] = 0;
             }
-            OnDescarteSatisfactorio();
-        }
-        else {
-            OnDescarteNonConsumable();
         }
     }
 
@@ -123,14 +109,7 @@ public class Inventario
             if (PInventario[_item] > 0)
             {
                 inventario[_item] -= 1;
-                OnConsumirItem();
-                //Item consumido
             }
-        }
-        else
-        {
-            OnConsumirNonConsumable();
-            //No puedes consumir el item
         }
     }
 

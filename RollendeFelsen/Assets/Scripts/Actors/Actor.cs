@@ -3,7 +3,6 @@ using UnityEngine;
 
 public abstract class Actor : MonoBehaviour
 {
-
     [SerializeField]
     protected CapsuleCollider pushCapsule;
 
