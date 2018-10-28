@@ -13,7 +13,8 @@ public class Enemy : Actor
     private Transform target;
     Vector3 direction;
     Quaternion lookRotation;
-    bool rockIsComing;
+    private bool rockIsComing;
+    private bool goForPU;
     [SerializeField] LayerMask rockLayer, powerUps;
     Vector3 destination;
     [SerializeField]
@@ -41,55 +42,69 @@ public class Enemy : Actor
 
     private void Update()
     {
-        if(Time.frameCount % 30 == 0)
+        if(Time.frameCount % 15 == 0)
         {
             distanceToPlayer = Vector3.Distance(player.localPosition, transform.localPosition);
             LookForPowerUps();
-        }
-        if (Time.frameCount % 60 == 0)
-        {
             LookForARock();
         }
 
-        Move();
-
-        if(rockIsComing && Agent.remainingDistance > Agent.stoppingDistance)
+        if (!hit || !rockIsComing || !goForPU)
         {
-            Agent.SetDestination(destination);
+            Move(); 
         }
-        else
+
+        if (rockIsComing)
         {
-            if(Agent.remainingDistance <= Agent.stoppingDistance)
+            if (Agent.remainingDistance > Agent.stoppingDistance)
             {
-                rockIsComing = false;
+                Agent.SetDestination(destination);
+            }
+            else
+            {
+                if (Agent.remainingDistance <= Agent.stoppingDistance)
+                {
+                    rockIsComing = false;
+                }
+            } 
+        }
+        else if(goForPU)
+        {
+            if (Agent.remainingDistance > Agent.stoppingDistance)
+            {
+                print("Holi");
+                Agent.SetDestination(destination);
+            }
+            else
+            {
+                if (Agent.remainingDistance <= Agent.stoppingDistance)
+                {
+                    goForPU = false;
+                }
             }
         }
     }
 
     protected override void Move()
     {
-        if (!hit || !rockIsComing)
+        if (distanceToPlayer <= goPushRadius)
         {
-            if (distanceToPlayer <= goPushRadius)
-            {
-                Agent.SetDestination(player.position);
+            Agent.SetDestination(player.position);
 
-                if (distanceToPlayer <= Agent.stoppingDistance)
-                {
-                    LookAt(player);
-                    StartCoroutine(Interacting());
-                }
-            }
-            else
+            if (distanceToPlayer <= Agent.stoppingDistance)
             {
-                Agent.SetDestination(target.position);
-                LookAt(target);
+                LookAt(player);
+                StartCoroutine(Interacting());
             }
-
-            animationSpeedPercent = (Agent.velocity.magnitude > 0.2f) ? 0.5f : 0;
-            m_Animator.SetFloat("speed", animationSpeedPercent, speedSmooothTime, Time.deltaTime); 
+        }
+        else
+        {
+            Agent.SetDestination(target.position);
+            LookAt(target);
         }
 
+        animationSpeedPercent = (Agent.velocity.magnitude > 0.2f) ? 0.5f : 0;
+        m_Animator.SetFloat("speed", animationSpeedPercent, speedSmooothTime, Time.deltaTime);
     }
 
     private void LookForARock()
@@ -111,7 +126,6 @@ public class Enemy : Actor
 
             destination = new Vector3(Mathf.Clamp(destination.x, ground.bounds.min.x + 0.2f, ground.bounds.max.x - 0.2f), destination.y, destination.z);
 
-            Debug.Log("Ols");
             //NavMeshHit navMeshHit;
             //if (NavMesh.FindClosestEdge(transform.localPosition, out navMeshHit, NavMesh.AllAreas))
             //{
@@ -121,14 +135,15 @@ public class Enemy : Actor
         }
     }
 
-    private void LookForPowerUps() {
-
+    private void LookForPowerUps()
+    {
         RaycastHit raycastHit;
 
         if (Physics.SphereCast(transform.localPosition, lookForRockRadius, Vector3.forward, out raycastHit, lookForRockRadius * 2, powerUps))
         {
             Transform hitTransform = raycastHit.transform;
-            print(hitTransform.gameObject.name);
+            destination = hitTransform.position;
+            goForPU = true;
         }
     }
 

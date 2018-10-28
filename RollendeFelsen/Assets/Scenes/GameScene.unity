@@ -4600,6 +4600,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 1438847651}
   slider: {fileID: 1835812760}
+--- !u!114 &1828641613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1828641611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f629457085321941ad4ea01354cc62f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpsPrefabs:
+  - {fileID: 1054930189073642, guid: 6b7dcc8ea9432284c90c6c2003a9acdb, type: 2}
+  - {fileID: 1308785214808368, guid: e8bd55cfd466c9d489415588a7927613, type: 2}
+  - {fileID: 1875102480081530, guid: 873895bdb9e98d54cb40c260380f00c0, type: 2}
+  spawnTime: 3
+  boxCollider: {fileID: 2055899486}
 --- !u!114 &1828641614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4613,6 +4630,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 589428513}
   target: {fileID: 1806619779}
+--- !u!114 &1828641615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1828641611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea846c41dda5dc44ac4b38b80abf111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1835812759
 GameObject:
   m_ObjectHideFlags: 0
@@ -5063,7 +5091,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2055899485}
-  - component: {fileID: 2055899484}
   - component: {fileID: 2055899486}
   m_Layer: 9
   m_Name: PowerUp Spawner
@@ -5072,22 +5099,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2055899484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2055899483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f629457085321941ad4ea01354cc62f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerUpsPrefabs:
-  - {fileID: 1875102480081530, guid: 873895bdb9e98d54cb40c260380f00c0, type: 2}
-  - {fileID: 1308785214808368, guid: e8bd55cfd466c9d489415588a7927613, type: 2}
-  - {fileID: 1054930189073642, guid: 6b7dcc8ea9432284c90c6c2003a9acdb, type: 2}
-  spawnTime: 2
 --- !u!4 &2055899485
 Transform:
   m_ObjectHideFlags: 0
