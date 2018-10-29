@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1842,7 +1842,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8, y: 1, z: 3}
+  m_Size: {x: 6, y: 1, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &593993440
 Transform:
@@ -4608,7 +4608,7 @@ MonoBehaviour:
   - {fileID: 1054930189073642, guid: 6b7dcc8ea9432284c90c6c2003a9acdb, type: 2}
   - {fileID: 1308785214808368, guid: e8bd55cfd466c9d489415588a7927613, type: 2}
   - {fileID: 1875102480081530, guid: 873895bdb9e98d54cb40c260380f00c0, type: 2}
-  spawnTime: 3
+  spawnTime: 6
   boxCollider: {fileID: 2055899486}
 --- !u!114 &1828641614
 MonoBehaviour:
@@ -4837,7 +4837,7 @@ Prefab:
     - target: {fileID: 114927460451031038, guid: e4a9c3dd283150c47add1615d616d388,
         type: 2}
       propertyPath: frecuency
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114927460451031038, guid: e4a9c3dd283150c47add1615d616d388,
         type: 2}

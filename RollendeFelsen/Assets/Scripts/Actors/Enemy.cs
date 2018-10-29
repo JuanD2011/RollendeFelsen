@@ -76,7 +76,7 @@ public class Enemy : Actor
             }
             else
             {
-                if (Agent.remainingDistance <= Agent.stoppingDistance)
+                if (Agent.remainingDistance <= 0.05f)
                 {
                     goForPU = false;
                 }
