@@ -21,9 +21,8 @@ public class Inventario
         }
     }
 
-    public Inventario()
-    {
-        billetera.Add(TypeCurrency.firstCurrency, 40);
+    public Inventario() {
+        Billetera.Add(TypeCurrency.firstCurrency, 0);
     }
 
     public static Inventario Instancia

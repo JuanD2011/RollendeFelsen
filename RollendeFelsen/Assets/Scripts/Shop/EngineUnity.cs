@@ -9,13 +9,14 @@ public class EngineUnity : MonoBehaviour {
     public static bool isFirstSkin, isSecondSkin, isThirdSkin;
 
     void Start () {
-        WriteCurrency();
+        LoadCurrency();
         Shop.delCompra += Compra;
         InitButtons();
+        WriteCurrency();
     }
 
     private void WriteCurrency() {
-        currencyUno.text = Inventario.Instancia.Billetera[TypeCurrency.firstCurrency].ToString("0");
+        currencyUno.text = Inventario.Instancia.Billetera[TypeCurrency.firstCurrency].ToString();
     }
 
     private void InitButtons() {
@@ -113,8 +114,14 @@ public class EngineUnity : MonoBehaviour {
         }
     }
 
-    public void ModificarCurrencyUno(int _amount) {
-        Inventario.Instancia.Billetera[TypeCurrency.firstCurrency] += _amount;
+    public void LoadCurrency() {
+        int value = PlayerPrefs.GetInt("Coins");
+        Inventario.Instancia.Billetera[TypeCurrency.firstCurrency] = value;
+        WriteCurrency();
+    }
+
+    public void GiveCurrency(int _amount) {
+        PlayerPrefs.SetInt("Coins", Inventario.Instancia.Billetera[TypeCurrency.firstCurrency] + _amount);
         WriteCurrency();
     }
 

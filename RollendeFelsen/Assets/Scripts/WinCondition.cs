@@ -12,7 +12,7 @@ public class WinCondition : MonoBehaviour
             Actor actor = other.gameObject.GetComponent<Actor>();
             OnFinish(actor);
             actor.gameObject.SetActive(false);
+            PlayerPrefs.SetInt("Coins", 30);
         }
     }
-
 }

@@ -2,13 +2,18 @@
 
 public class Memento : MonoBehaviour
 {
-    private Memento instance;
+    private static Memento instance;
 
-    public Memento Instance
+    public static Memento Instance
     {
         get
         {
             return instance;
+        }
+
+        set
+        {
+            instance = value;
         }
     }
 
@@ -17,20 +22,22 @@ public class Memento : MonoBehaviour
         instance = this;
     }
 
-    public void Save(string key, float value)
+    public void Save(string key, int value)
     {
-        PlayerPrefs.SetFloat(key, value);
+        PlayerPrefs.SetInt(key, Inventario.Instancia.Billetera[TypeCurrency.firstCurrency] + value);
     }
 
-    public float Load(string key)
+    public void Load(string key)
     {
-        float value = 0;
+        int value = 0;
 
-        if(PlayerPrefs.HasKey(key))
+        if (PlayerPrefs.HasKey(key))
         {
-            PlayerPrefs.GetFloat(key);
+            value = PlayerPrefs.GetInt(key);
+            Inventario.Instancia.Billetera[TypeCurrency.firstCurrency] = value;
         }
-
-        return value;
+        else {
+            PlayerPrefs.SetInt(key, 0);
+        }
     }
 }
