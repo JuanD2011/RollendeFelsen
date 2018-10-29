@@ -4837,7 +4837,7 @@ Prefab:
     - target: {fileID: 114927460451031038, guid: e4a9c3dd283150c47add1615d616d388,
         type: 2}
       propertyPath: frecuency
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114927460451031038, guid: e4a9c3dd283150c47add1615d616d388,
         type: 2}

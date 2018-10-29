@@ -5,19 +5,32 @@ public class EngineUnity : MonoBehaviour {
 
     [SerializeField] Text currencyUno;
     [SerializeField] Button[] buttonsShop;
-    [SerializeField] Toggle[] skinSelected;
 
     public static bool isFirstSkin, isSecondSkin, isThirdSkin;
 
     void Start () {
         WriteCurrency();
         Shop.delCompra += Compra;
-        
-        InitToggles();
+        InitButtons();
     }
 
     private void WriteCurrency() {
         currencyUno.text = Inventario.Instancia.Billetera[TypeCurrency.firstCurrency].ToString("0");
+    }
+
+    private void InitButtons() {
+        for (int i = 0; i < buttonsShop.Length; i++) {
+            if (Inventario.Instancia.PInventario.ContainsValue(i + 1))
+            {
+                buttonsShop[i].interactable = false;
+                buttonsShop[i].transform.GetChild(1).GetComponent<Button>().interactable = true;
+            }
+            else {
+                buttonsShop[i].interactable = true;
+                buttonsShop[i].transform.GetChild(1).GetComponent<Button>().interactable = false;
+            }
+            buttonsShop[i].transform.GetChild(2).GetComponent<Image>().enabled = false;
+        }
     }
 
     private void Compra(Item _item) {
@@ -35,7 +48,7 @@ public class EngineUnity : MonoBehaviour {
             default:
                 break;
         }
-        skinSelected[_item.Id - 1].interactable = true;
+        buttonsShop[_item.Id - 1].transform.GetChild(1).GetComponent<Button>().interactable = true;
         WriteCurrency();
     }
 
@@ -60,23 +73,15 @@ public class EngineUnity : MonoBehaviour {
             default:
                 break;
         }
-    }
 
-    private void DeselectSkin(int _index) {
-
-        for (int i = 0; i < skinSelected.Length; i++) {
-            if (i != _index - 1) {
-
+        for (int i = 0; i < buttonsShop.Length; i++) {
+            if (i == _indexSkin - 1)
+            {
+                buttonsShop[_indexSkin - 1].transform.GetChild(2).GetComponent<Image>().enabled = true;
             }
-        }
-    }
-    private void InitToggles() {
-        isFirstSkin = false;
-        isSecondSkin = false;
-        isThirdSkin = false;
-
-        foreach (Toggle a in skinSelected) {
-            a.interactable = false;
+            else if (i != _indexSkin-1) {
+                buttonsShop[i].transform.GetChild(2).GetComponent<Image>().enabled = false;
+            }
         }
     }
 
