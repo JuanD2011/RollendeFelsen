@@ -5,7 +5,7 @@ Animaciones y personajes de AdobeMixamo
 TextMeshPro para textos
 
 #Bugs
-Movimiento en la inteligencia artificial de los enemigos. -> Solución: Tener en cuenta detalles a la hora de desarrollar AI
+El código de memento, el manejar instancias estáticas y elementos que no heredan de monobehavior se hace confuso -> solución: reconstruir la manera en la que se llaman las clases, atributos, etc.
 Mucha fuerza del jugador a la hora de empujar un enemigo. -> Solución: Reconstrucción del código
 
 
