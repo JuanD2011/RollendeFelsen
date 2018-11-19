@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4623,17 +4623,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 589428513}
   target: {fileID: 1806619779}
---- !u!114 &1828641615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1828641611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ea846c41dda5dc44ac4b38b80abf111, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1835812759
 GameObject:
   m_ObjectHideFlags: 0
@@ -4844,6 +4833,46 @@ Prefab:
       propertyPath: playerSpawner
       value: 
       objectReference: {fileID: 175194679}
+    - target: {fileID: 114202610818017318, guid: e4a9c3dd283150c47add1615d616d388,
+        type: 2}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 2055899486}
+    - target: {fileID: 114173684903978572, guid: e4a9c3dd283150c47add1615d616d388,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 589428513}
+    - target: {fileID: 114173684903978572, guid: e4a9c3dd283150c47add1615d616d388,
+        type: 2}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1806619779}
+    - target: {fileID: 114237231374854762, guid: e4a9c3dd283150c47add1615d616d388,
+        type: 2}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 1438847651}
+    - target: {fileID: 114237231374854762, guid: e4a9c3dd283150c47add1615d616d388,
+        type: 2}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 1835812760}
+    - target: {fileID: 114237231374854762, guid: e4a9c3dd283150c47add1615d616d388,
+        type: 2}
+      propertyPath: canvas.Array.data[0]
+      value: 
+      objectReference: {fileID: 1171243029}
+    - target: {fileID: 114237231374854762, guid: e4a9c3dd283150c47add1615d616d388,
+        type: 2}
+      propertyPath: canvas.Array.data[1]
+      value: 
+      objectReference: {fileID: 191673921}
+    - target: {fileID: 114237231374854762, guid: e4a9c3dd283150c47add1615d616d388,
+        type: 2}
+      propertyPath: txtFinish
+      value: 
+      objectReference: {fileID: 499288885}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a9c3dd283150c47add1615d616d388, type: 2}
   m_IsPrefabAsset: 0

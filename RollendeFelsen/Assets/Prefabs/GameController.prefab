@@ -20,6 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4437952543505044}
   - component: {fileID: 114927460451031038}
+  - component: {fileID: 114237231374854762}
+  - component: {fileID: 114202610818017318}
+  - component: {fileID: 114173684903978572}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -34,12 +37,59 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1384289519040432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5250679, y: 31.671185, z: 80.08251}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114173684903978572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1384289519040432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b574ad112f8ca4a47a602af22170f164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  target: {fileID: 0}
+--- !u!114 &114202610818017318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1384289519040432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f629457085321941ad4ea01354cc62f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpsPrefabs:
+  - {fileID: 1054930189073642, guid: 6b7dcc8ea9432284c90c6c2003a9acdb, type: 2}
+  - {fileID: 1308785214808368, guid: e8bd55cfd466c9d489415588a7927613, type: 2}
+  - {fileID: 1875102480081530, guid: 873895bdb9e98d54cb40c260380f00c0, type: 2}
+  spawnTime: 3
+  boxCollider: {fileID: 0}
+--- !u!114 &114237231374854762
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1384289519040432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b34bd319ed7804da99114f2c73c38f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 0}
+  slider: {fileID: 0}
+  canvas:
+  - {fileID: 0}
+  - {fileID: 0}
+  txtFinish: {fileID: 0}
 --- !u!114 &114927460451031038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,14 +102,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rockPrefab: {fileID: 1254497589967810, guid: e72afb00d0a795a4080ba108d4106c64, type: 2}
-  rockSpawns:
-  - {fileID: 4077524608171016, guid: 52d3dde3fd2f088418cb62956de4ff8c, type: 2}
-  - {fileID: 4260737956576110, guid: 52d3dde3fd2f088418cb62956de4ff8c, type: 2}
-  - {fileID: 4079580137623212, guid: 52d3dde3fd2f088418cb62956de4ff8c, type: 2}
-  - {fileID: 4355181968568748, guid: 52d3dde3fd2f088418cb62956de4ff8c, type: 2}
-  playerSpawns:
-  - {fileID: 4668425710522844, guid: eff7ec6d847ea0a4fae502632c576a40, type: 2}
-  - {fileID: 4281355711296168, guid: eff7ec6d847ea0a4fae502632c576a40, type: 2}
-  - {fileID: 4138664978130066, guid: eff7ec6d847ea0a4fae502632c576a40, type: 2}
-  - {fileID: 4933810625970902, guid: eff7ec6d847ea0a4fae502632c576a40, type: 2}
-  frecuency: 10
+  rockSpawner: {fileID: 0}
+  frecuency: 3
+  playerSpawner: {fileID: 0}
+  txtPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
